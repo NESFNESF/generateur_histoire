@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+    <style>
+        .image-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.image-wrap {
+  flex-shrink: 0;
+  margin-right: 20px;
+  position: relative;
+  overflow: hidden;
+  width: 256px;
+  height: 256px;
+  border-radius: 5%;
+}
+
+.image-wrap img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5%;
+}
+
+p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.circle-overlay {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  width: 276px;
+  height: 276px;
+  border-radius: 5%;
+  background-color: #f9c74f;
+  opacity: 0;
+  transition: opacity 0.2s ease-out;
+}
+
+.image-container:hover .circle-overlay {
+  opacity: 0.6;
+}
+
+
+    </style>
+</head>
+<body>
+    <div class="image-container">
+        <div class="image-wrap">
+            <img src="https://pub-8b49af329fae499aa563997f5d4068a4.r2.dev/generations/325bf932-2793-4a1c-be33-43259b208835-0.png" alt="Description of Image">
+        </div>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam consectetur, metus non lobortis ultrices, velit velit bibendum ante, sit amet commodo eros enim in ipsum. 
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit animi voluptatem sequi nostrum, quae asperiores omnis velit suscipit tempore rem dignissimos atque porro ducimus nemo, error commodi, ex corrupti excepturi?
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere odio inventore dolorum tempore incidunt veritatis voluptatibus, dicta repellendus dolore vel ab facilis exercitationem quidem minus omnis suscipit laborum. Enim, quidem.
+        </p>
+        <div class="circle-overlay"></div>
+    </div>
+
+</body>
+</html>

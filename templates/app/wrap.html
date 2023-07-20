@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+    <style>
+        .image-container {
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+        }
+
+        .image-container img {
+        float: left;
+        margin-right: 20px;
+        margin-bottom: 20px;
+        max-width: 100%;
+        }
+
+        .image-container p {
+        margin-top: 0;
+        font-size: 16px;
+        line-height: 1.5;
+        }
+
+        .image-container::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 80px;
+        height: 80px;
+        background-color: #f9c74f;
+        border-radius: 50%;
+        z-index: -1;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="image-container">
+        <img src="https://pub-8b49af329fae499aa563997f5d4068a4.r2.dev/generations/325bf932-2793-4a1c-be33-43259b208835-0.png " alt="Description of Image">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam consectetur, metus non lobortis ultrices, velit velit bibendum ante, sit amet commodo eros enim in ipsum. 
+           Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus necessitatibus doloremque deserunt harum provident architecto numquam nesciunt saepe ipsam maxime voluptatum reprehenderit earum, culpa fugit? Laboriosam commodi ut laudantium animi. 
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium dignissimos aspernatur possimus esse nemo dolore porro ea incidunt, assumenda similique fugiat est, sequi, nam molestias necessitatibus doloremque. Quos, ex expedita.
+        </p>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, aut repellat, omnis ullam enim delectus qui incidunt aperiam similique, eaque commodi quas assumenda odio esse temporibus aliquam corrupti distinctio est?
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem consequatur quo eaque aperiam? Error, sequi repudiandae temporibus minus esse illo molestiae reprehenderit et officia deserunt numquam praesentium, totam eveniet! Fugiat.
+        </p>
+    </div>
+      
+</body>
+</html>

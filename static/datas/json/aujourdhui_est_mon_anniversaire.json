@@ -1,0 +1,84 @@
+{
+    "title": "Aujourd'hui c'est mon anniversaire",
+    "resumeHistory": "C'est l'anniversaire de notre héros et il est impatient de célébrer avec sa famille et ses amis. Mais les choses ne se passent pas comme prévu...",
+    "chapters": [
+        {
+            "title": "Le réveil",
+            "paragraphs": [
+                {
+                    "text": "Notre héros se réveille tôt le matin, rempli d'excitation pour son anniversaire. Il saute hors de son lit et court dans la cuisine pour prendre son petit déjeuner.",
+                    "illustration": ""
+                },
+                {
+                    "text": "Sa mère lui prépare des pancakes en forme de coeur et lui offre un cadeau emballé dans du papier cadeau brillant. Notre héros est ravi et ouvre le cadeau avec impatience.",
+                    "illustration": ""
+                },
+                {
+                    "text": "C'est une nouvelle console de jeux vidéo ! Notre héros est aux anges et remercie sa mère avec un gros câlin.",
+                    "illustration": ""
+                },
+                {
+                    "text": "Après avoir fini son petit déjeuner, notre héros se prépare pour la journée. Il enfile son t-shirt préféré et ses baskets neuves.",
+                    "illustration": ""
+                },
+                {
+                    "text": "Il est prêt à partir pour l'école, mais avant cela, il doit prendre une photo avec sa famille pour commémorer cette journée spéciale.",
+                    "illustration": ""
+                }
+            ],
+            "resume": "Notre héros se réveille tôt le matin et est ravi de recevoir un cadeau de sa mère pour son anniversaire."
+        },
+        {
+            "title": "L'école",
+            "paragraphs": [
+                {
+                    "text": "Notre héros arrive à l'école et est accueilli par ses amis qui lui souhaitent un joyeux anniversaire. Il est heureux de voir que tout le monde se souvient de son jour spécial.",
+                    "illustration": ""
+                },
+                {
+                    "text": "Pendant la récréation, notre héros partage son gâteau d'anniversaire avec ses amis. Tout le monde est impressionné par le gâteau en forme de voiture qu'a fait sa mère.",
+                    "illustration": ""
+                },
+                {
+                    "text": "Après l'école, notre héros rentre chez lui en courant pour jouer avec sa nouvelle console de jeux vidéo. Mais quand il arrive à la maison, il découvre que la console ne fonctionne pas !",
+                    "illustration": ""
+                },
+                {
+                    "text": "Notre héros est dévasté. Il avait tellement attendu ce cadeau et maintenant il ne peut même pas y jouer.",
+                    "illustration": ""
+                },
+                {
+                    "text": "Sa mère essaie de réparer la console, mais rien ne fonctionne. Finalement, elle décide d'appeler le magasin pour demander un remboursement ou un échange.",
+                    "illustration": ""
+                }
+            ],
+            "resume": "Notre héros partage son gâteau d'anniversaire avec ses amis à l'école, mais quand il rentre chez lui, il découvre que sa nouvelle console de jeux vidéo ne fonctionne pas."
+        },
+        {
+            "title": "La fête",
+            "paragraphs": [
+                {
+                    "text": "Le soir, la famille et les amis de notre héros arrivent pour la fête d'anniversaire. Tout le monde est heureux de célébrer avec lui.",
+                    "illustration": ""
+                },
+                {
+                    "text": "Mais notre héros est triste. Il ne peut pas jouer avec sa nouvelle console de jeux vidéo et il se sent comme si sa journée spéciale était gâchée.",
+                    "illustration": ""
+                },
+                {
+                    "text": "Sa mère essaie de le réconforter en lui disant que ce n'est pas grave et qu'ils peuvent toujours s'amuser sans la console. Elle organise des jeux et des activités pour tout le monde.",
+                    "illustration": ""
+                },
+                {
+                    "text": "Finalement, notre héros commence à s'amuser avec ses amis et sa famille. Ils mangent du gâteau, dansent et chantent ensemble.",
+                    "illustration": ""
+                },
+                {
+                    "text": "Notre héros réalise que même sans sa nouvelle console de jeux vidéo, il peut encore passer un bon moment avec les gens qu'il aime. Il est reconnaissant pour cette journée spéciale et pour tous ceux qui ont célébré avec lui.",
+                    "illustration": ""
+                }
+            ],
+            "resume": "La famille et les amis de notre héros arrivent pour la fête d'anniversaire, mais notre héros est triste car sa nouvelle console de jeux vidéo ne fonctionne pas. Sa mère organise des jeux et des activités pour tout le monde et notre héros réalise qu'il peut encore passer un bon moment sans la console."
+        }
+    ]
+}

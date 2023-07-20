@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Delius Swash Caps">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{titre}}</title>
+    <style>
+        @font-face {
+            font-family: "happy-holiday";
+            src: url("./fonts/happy-holiday.regular.ttf");
+        }
+
+        @font-face {
+            font-family: "luna-love-display";
+            src: url("./fonts/luna-love-display-personal.display.ttf");
+        }
+
+
+
+
+        body {
+            margin: 0;
+            background-color: hsl(0, 0%, 100%);
+            line-height: 1.5;
+            font-weight: lighter;
+            font-family: cursive
+        }
+
+        .content-width {
+            padding-top: 50px;
+            padding-left: 50px;
+            padding-right: 50px;
+            text-align: justify !important;
+            max-width: 70ch;
+            width: calc(100% - 4rem);
+            margin: 0 auto;
+        }
+
+
+        main {
+            margin-bottom: 4rem;
+        }
+
+        header {
+            margin-bottom: 4rem;
+            padding: 2rem 0;
+            background-color: hsl(280, 50%, 40%);
+            border-bottom: 4px solid hsl(300, 50%, 50%);
+            color: hsl(300, 50%, 90%);
+        }
+
+        header p {
+            color: hsl(300, 50%, 85%);
+        }
+
+        p {
+            font-size: 30px;
+            justify-self: center;
+            align-content: center;
+            justify-content: center;
+            font-family: 'Delius Swash Caps';
+            text-align: justify !important
+        }
+
+        h1 {
+            margin: 0 auto;
+            line-height: 1.25;
+            text-align: center;
+        }
+
+        #a4 {
+            width: 21cm;
+            height: 29.7cm;
+            background-color: #f2f2f2;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            padding: 2cm;
+            font-size: 14pt;
+            line-height: 1.5;
+        }
+
+        h2,
+        h3 {
+            margin: 0 auto;
+            line-height: 1.25;
+            font-family: 'luna-love-display';
+            /* color: hsl(280, 50%, 40%); */
+            color: #2e95c9;
+            font-size: 75px;
+            font-weight: 300px;
+            text-align: center;
+        }
+
+        .demotext {
+            color: #fcfcfc;
+            font-size: 80px;
+            font-family: 'happy-holiday';
+            letter-spacing: 7px;
+            /* padding-top: -250px !important; */
+            /* align-self: center; */
+            margin-top: 50mm;
+            text-shadow: 0 1px 0px #378ab4, 1px 0 0px #5dabcd, 1px 2px 1px #378ab4, 2px 1px 1px #5dabcd, 2px 3px 2px #378ab4, 3px 2px 2px #5dabcd, 3px 4px 2px #378ab4, 4px 3px 3px #5dabcd, 4px 5px 3px #378ab4, 5px 4px 2px #5dabcd, 5px 6px 2px #378ab4, 6px 5px 2px #5dabcd, 6px 7px 1px #378ab4, 7px 6px 1px #5dabcd, 7px 8px 0px #378ab4, 8px 7px 0px #5dabcd;
+        }
+
+        .firstPage {
+            /* margin: 0; */
+            display: flex;
+            background-image: url("test.png");
+            background-repeat: no-repeat;
+            background-size: cover;
+            border-radius: 5px;
+            /* color: hsl(300, 50%, 90%); */
+            justify-content: center;
+            height: 197.5mm !important;
+            padding-top: 100mm;
+
+
+            width: 210mm;
+            margin-bottom: 20px !important;
+            margin: 0 auto;
+
+        }
+
+        .illustration {
+            /* justify-content: center;
+      align-self: center;
+      align-items: center;
+      align-content: center;
+      justify-items: center; */
+
+            /* align-self: center;
+      justify-self: center;
+      width: 70px;
+      border-radius: 50%;
+      margin-right: 20px;
+      margin: 0 auto;
+      width: 100%; */
+
+            width: 18cm;
+            height: 13cm;
+            border-radius: 5px;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+
+        @media print {
+            .new-page {
+                page-break-before: always;
+            }
+        }
+
+        .keep-together {
+            page-break-inside: avoid;
+        }
+
+        .break-before {
+            page-break-before: always;
+        }
+
+        .break-after {
+            page-break-after: always;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <!-- <header>
+      <div class="content-width">
+        <h1 id="demotext"> Titre de l'histoire</h1>
+
+      </div>
+    </header> -->
+
+        <div class="firstPage break-after keep-together">
+
+
+            <h1 class="demotext"> Titre de l'histoire</h1>
+
+        </div>
+        <div class="content-width">
+             {% for chapitre in chapitres %} 
+            <div class="break-after keep-together">
+                <!-- <h3>chapitre titre</h3> -->
+                </br>
+                </br>
+                <!-- <img src="test.png" alt="test.png" class="illustration"> -->
+                <img src="test.png" alt="test.png" class="illustration">
+                 {% for p in chapitre.paragraphs %} 
+                <p>{{p.text}}</p>
+                
+                 {% endfor %} 
+            </div>
+             {% endfor %} 
+        </div>
+    </main>
+</body>
+
+</html>

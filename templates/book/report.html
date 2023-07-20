@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{titre}}</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: hsl(0, 0%, 100%);
+            color: hsl(0, 0%, 10%);
+            line-height: 1.5;
+            font-weight: lighter;
+            font-family: cursive
+        }
+
+        .content-width {
+            max-width: 70ch;
+            width: calc(100% - 4rem);
+            margin: 0 auto;
+        }
+
+        main {
+            margin-bottom: 4rem;
+        }
+
+        header {
+            margin-bottom: 4rem;
+            padding: 2rem 0;
+            background-color: hsl(280, 50%, 40%);
+            border-bottom: 4px solid hsl(300, 50%, 50%);
+            color: hsl(300, 50%, 90%);
+        }
+
+        header p {
+            color: hsl(300, 50%, 85%);
+        }
+
+        p {
+            font-size: 30px;
+        }
+
+        h1,
+        h2,
+        h3 {
+            margin: 0;
+            line-height: 1.25;
+        }
+
+        #a4 {
+            width: 21cm;
+            height: 29.7cm;
+            background-color: #f2f2f2;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            padding: 2cm;
+            font-size: 14pt;
+            line-height: 1.5;
+        }
+
+        h2,
+        h3 {
+            color: hsl(280, 50%, 40%);
+            font-size: 40px;
+        }
+
+        #demotext {
+            /* color: #FFFFFF;
+			background: #333333;
+			text-shadow: 0 -1px 4px #FFF, 0 -2px 10px #ff0, 0 -10px 20px #ff8000, 0 -18px 40px #F00;
+			color: #FFFFFF;
+			background: #333333; */
+            color: #fcfcfc;
+            font-size: 45px;
+            text-shadow: 0 1px 0px #378ab4, 1px 0 0px #5dabcd, 1px 2px 1px #378ab4, 2px 1px 1px #5dabcd, 2px 3px 2px #378ab4, 3px 2px 2px #5dabcd, 3px 4px 2px #378ab4, 4px 3px 3px #5dabcd, 4px 5px 3px #378ab4, 5px 4px 2px #5dabcd, 5px 6px 2px #378ab4, 6px 5px 2px #5dabcd, 6px 7px 1px #378ab4, 7px 6px 1px #5dabcd, 7px 8px 0px #378ab4, 8px 7px 0px #5dabcd;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <header>
+            <div class="content-width">
+                <h1 id="demotext"> {{titre}}</h1>
+
+            </div>
+        </header>
+
+        <div class="content-width">
+            {% for chapitre in chapitres %}
+            <div id="a4">
+                <h3>{{chapitre.titre}}</h3>
+                <img src="{{chapitre.image}}" alt="{{chapitre.image}}">
+                {% for p in chapitre.contenu.paragraphes %}
+                <p>{{p}}</p>
+                {% endfor %}
+
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

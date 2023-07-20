@@ -1,0 +1,100 @@
+{
+  "title": "L'enfant qui voulait changer le monde avec l'informatique",
+  "resumeHistory": "Un enfant nommé Max vivait dans un monde où l'informatique était omniprésente, mais il savait que c'était possible de l'utiliser pour faire des choses encore plus grandes. Il a décidé de changer le monde avec l'informatique.",
+  "chapters": [
+    {
+      "title": "découverte de l'informatique",
+      "paragraphs": [
+        {
+          "text": "Max était fasciné par les ordinateurs et les programmes qu'il voyait dans son école. Il a décidé de commencer à apprendre à programmer.",
+          "illustration": "Une vue d'un ordinateur avec un enfant en train de programmer"
+        },
+        {
+          "text": "Max a commencé à prendre des cours de programmation et a réalisé qu'il avait un talent naturel pour cela.",
+          "illustration": "Une vue d'un enfant en train de programmer avec un sourire sur le visage"
+        },
+        {
+          "text": "Max a commencé à travailler sur des projets plus grands, comme la création d'un logiciel qui aiderait les personnes à mieux gérer leur temps.",
+          "illustration": "Une vue d'un enfant en train de travailler sur un ordinateur avec un projet sur écran"
+        }
+      ],
+      "resume": "Max découvre l'informatique et développe un talent pour le programmation."
+    },
+    {
+      "title": "Max crée un site web pour aider les personnes à trouver des opportunités de carrière",
+      "paragraphs": [
+        {
+          "text": "Max a décidé de créer un site web pour aider les personnes à trouver des opportunités de carrière. Il a passé des semaines à travailler sur le design et la fonctionnalité du site.",
+          "illustration": "Une vue d'un enfant en train de travailler sur un ordinateur avec un design de site web sur écran"
+        },
+        {
+          "text": "Max a recruté des bénévoles pour aider à recueillir des informations sur les opportunités de carrière et a travaillé avec des experts pour s'assurer que le site web était fiable et utile pour les utilisateurs.",
+          "illustration": "Une vue d'un enfant en train de travailler avec des bénévoles et des experts"
+        },
+        {
+          "text": "Le site web a été un grand succès et a aidé de nombreuses personnes à trouver des emplois. Max a été reconnaissant de son succès, mais il savait qu'il y avait encore beaucoup de choses à faire.",
+          "illustration": "Une vue de Max en train de regarder les commentaires positifs sur son site web"
+        }
+      ],
+      "resume": "Max crée un site web pour aider les personnes à trouver des opportunités de carrière"
+    },
+    {
+      "title": "découverte du recyclage",
+      "paragraphs": [
+        {
+          "text": "Max a réalisé que sa communauté avait un problème de déchets et qu'il y avait peu de moyens de recycler.",
+          "illustration": "Une vue de Max en train de réfléchir à un problème de déchets"
+        },
+        {
+          "text": "Max a décidé de développer un système de recyclage de déchets qui permettrait à ses concitoyens de recycler plus efficacement.",
+          "illustration": "Une vue de Max en train de travailler sur un projet de recyclage de déchets"
+        },
+        {
+          "text": "Max a travaillé avec des experts et des bénévoles pour mettre en place son système de recyclage de déchets, et il a réussi à convaincre la municipalité de le soutenir.",
+          "illustration": "Une vue de Max en train de discuter avec des experts et des bénévoles"
+        }
+      ],
+      "resume": "travail"
+    },
+    {
+        "title": "découverte de l'informatique",
+        "paragraphs": [
+          {
+            "text": "Max était fasciné par les ordinateurs et les programmes qu'il voyait dans son école. Il a décidé de commencer à apprendre à programmer.",
+            "illustration": "Une vue d'un ordinateur avec un enfant en train de programmer"
+          },
+          {
+            "text": "Max a commencé à prendre des cours de programmation et a réalisé qu'il avait un talent naturel pour cela.",
+            "illustration": "Une vue d'un enfant en train de programmer avec un sourire sur le visage"
+          },
+          {
+            "text": "Max a commencé à travailler sur des projets plus grands, comme la création d'un logiciel qui aiderait les personnes à mieux gérer leur temps.",
+            "illustration": "Une vue d'un enfant en train de travailler sur un ordinateur avec un projet sur écran"
+          }
+        ],
+        "resume": "Max découvre l'informatique et développe un talent pour le programmation."
+      },
+      {
+        "title": "découverte de l'informatique",
+        "paragraphs": [
+          {
+            "text": "Max était fasciné par les ordinateurs et les programmes qu'il voyait dans son école. Il a décidé de commencer à apprendre à programmer.",
+            "illustration": "Une vue d'un ordinateur avec un enfant en train de programmer"
+          },
+          {
+            "text": "Max a commencé à prendre des cours de programmation et a réalisé qu'il avait un talent naturel pour cela.",
+            "illustration": "Une vue d'un enfant en train de programmer avec un sourire sur le visage"
+          },
+          {
+            "text": "Max a commencé à travailler sur des projets plus grands, comme la création d'un logiciel qui aiderait les personnes à mieux gérer leur temps.",
+            "illustration": "Une vue d'un enfant en train de travailler sur un ordinateur avec un projet sur écran"
+          },
+          {
+            "text": "Max a commencé à prendre des cours de programmation et a réalisé qu'il avait un talent naturel pour cela.",
+            "illustration": "Une vue d'un enfant en train de programmer avec un sourire sur le visage"
+          }
+        ],
+        "resume": "Max découvre l'informatique et développe un talent pour le programmation."
+      }
+  ]
+}

@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Henny Penny">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{titre}}</title>
+
+    <style>
+        @font-face {
+            font-family: "happy-holiday";
+            src: url("./fonts/happy-holiday.regular.ttf");
+        }
+
+        @font-face {
+            font-family: "luna-love-display";
+            src: url("./fonts/luna-love-display-personal.display.ttf");
+        }
+
+        @font-face {
+            font-family: "hola-sophia";
+            src: url("./fonts/hola-sophia.regular.ttf");
+        }
+
+        @font-face {
+            font-family: "kids-book";
+            src: url("./fonts/kids-book.regular.ttf");
+        }
+
+        @font-face {
+            font-family: "unicorn-fold";
+            src: url("./fonts/unicorn-fold-display-personal.display.ttf");
+        }
+
+
+        h1 {
+            font-family: "Henny Penny";
+            letter-spacing: 0.04em;
+            font-size: 110px !important;
+            text-shadow: 0 1px #8da1ff, -1px 0 #c0cbff, -1px 2px #8da1ff, -2px 1px #c0cbff,
+                -2px 3px #8da1ff, -3px 2px #c0cbff, -3px 4px #8da1ff, -4px 3px #c0cbff,
+                -4px 5px #8da1ff, -5px 4px #c0cbff, -5px 6px #8da1ff, -6px 5px #c0cbff,
+                -6px 7px #8da1ff, -7px 6px #c0cbff, -7px 8px #8da1ff, -8px 7px #c0cbff;
+
+            /* margin: 0 auto; */
+            margin-top: 25mm;
+            color: #274dff;
+            text-align: center;
+        }
+
+        h2,
+        h3 {
+
+            font-family: "unicorn-fold", cursive;
+            /* color: hsl(280, 50%, 40%); */
+            color: #274dff;
+            font-size: 75px;
+            font-weight: 300px;
+            text-align: center;
+            margin: 0 auto;
+            line-height: 1.25;
+            text-align: center;
+            /* text-shadow: 0 1px 0px #378ab4, 1px 0 0px #5dabcd, 1px 2px 1px #378ab4, 2px 1px 1px #5dabcd, 2px 3px 2px #378ab4, 3px 2px 2px #5dabcd, 3px 4px 2px #378ab4, 4px 3px 3px #5dabcd, 4px 5px 3px #378ab4, 5px 4px 2px #5dabcd, 5px 6px 2px #378ab4, 6px 5px 2px #5dabcd, 6px 7px 1px #378ab4, 7px 6px 1px #5dabcd, 7px 8px 0px #378ab4, 8px 7px 0px #5dabcd; */
+        }
+
+
+        #a4 {
+            width: 21cm;
+            height: 29.7cm;
+            background-color: #f2f2f2;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            padding: 2cm;
+            font-size: 14pt;
+            line-height: 1.5;
+        }
+
+        /* h2,
+        h3 {
+
+            margin: 0 auto;
+            line-height: 1.25;
+            text-align: center;
+            text-shadow: 0 1px 0px #378ab4, 1px 0 0px #5dabcd, 1px 2px 1px #378ab4, 2px 1px 1px #5dabcd, 2px 3px 2px #378ab4, 3px 2px 2px #5dabcd, 3px 4px 2px #378ab4, 4px 3px 3px #5dabcd, 4px 5px 3px #378ab4, 5px 4px 2px #5dabcd, 5px 6px 2px #378ab4, 6px 5px 2px #5dabcd, 6px 7px 1px #378ab4, 7px 6px 1px #5dabcd, 7px 8px 0px #378ab4, 8px 7px 0px #5dabcd;
+        } */
+
+        body {
+            margin: 0;
+            background-color: hsl(0, 0%, 100%);
+            color: hsl(0, 0%, 10%);
+            line-height: 1.5;
+            font-weight: lighter;
+            font-family: cursive
+        }
+
+        .content-width {
+            /* padding-top: 50px; */
+            /* padding-left: 50px;
+            padding-right: 50px; */
+            text-align: justify !important;
+            max-width: 70ch;
+            width: calc(100% - 4rem);
+            margin: 0 auto;
+
+        }
+
+
+        main {
+            margin-bottom: 4rem;
+        }
+
+        header {
+            margin-bottom: 4rem;
+            padding: 2rem 0;
+            background-color: hsl(280, 50%, 40%);
+            border-bottom: 4px solid hsl(300, 50%, 50%);
+            color: hsl(300, 50%, 90%);
+        }
+
+        header p {
+            color: hsl(300, 50%, 85%);
+        }
+
+        p {
+            font-family: "kids-book";
+            font-size: 27px;
+            margin-left: 50px;
+            margin-right: 50px;
+            padding-top: 170mm;
+            color: white;
+            text-align: center !important;
+
+
+        }
+
+        .chapterTitle {
+            font-family: "hola-sophia";
+            font-size: 30px;
+            letter-spacing: 0.3px;
+            margin-left: 8.5mm;
+            /* background-color: #274dff; */
+            height: 90px !important;
+            width: 150px !important;
+            text-align: center;
+            position: absolute;
+            margin-top: 8mm !important;
+            color: #a68364;
+        }
+
+        .chapterTitleDecoration {
+            margin: 0 auto !important;
+            margin-top: 105mm !important;
+            position: relative;
+            background-image: url('./images/text_decorations/vecteezy_vintage-calligraphic-frame-and-border-illustration_16475132_887.png');
+            background-repeat: no-repeat;
+            background-size: 55mm 40mm !important;
+            height: 40mm !important;
+            width: 55mm !important;
+            background-position: center;
+        }
+
+
+        .firstPage {
+            /* margin: 0; */
+            /* margin-bottom: 20px; */
+            width: 210mm;
+            display: flex;
+            color: hsl(300, 50%, 90%);
+            margin-bottom: 20px !important;
+            margin: 0 auto;
+            justify-content: center;
+            height: 197.5mm !important;
+            padding-top: 100mm;
+
+        }
+
+        .illustration {
+
+            width: 18cm;
+            height: 13cm;
+            border-radius: 5px;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+
+        @media print {
+            .new-page {
+                page-break-before: always;
+            }
+        }
+
+        .keep-together {
+            page-break-inside: avoid;
+
+
+        }
+
+        .break-before {
+            page-break-before: always;
+        }
+
+        .break-after {
+            page-break-after: always;
+
+        }
+
+        span {
+            font-family: "kids-book";
+            font-size: 20px;
+
+        }
+
+        .blockCard {
+            width: 210mm;
+            height: 297mm;
+        }
+
+        .imageCard {
+            width: 105mm;
+            height: 148.5mm;
+            /* border-bottom-right-radius: 10px; */
+            border-top-right-radius: 5px;
+        }
+
+        .card {
+            display: flex;
+            display: -webkit-box;
+            flex-direction: row;
+            width: 210mm;
+            height: 148.5mm;
+        }
+
+        .textCard {
+            margin-left: 20px;
+            /* margin-right: 20px !important; */
+            height: 148.5mm;
+            /* background-color: #274dff; */
+            width: 90mm;
+            margin-top: 52.5mm;
+            flex-direction: column;
+            text-align: center !important;
+            -webkit-box-pack: center;
+            justify-content: center;
+        }
+
+        .card2 {
+            display: flex;
+            display: -webkit-box;
+            width: 210mm;
+            height: 148.5mm;
+        }
+
+
+        .imageCard2 {
+            width: 105mm;
+            height: 149mm;
+            margin-left: 10mm;
+        }
+
+        .textCard2 {
+            height: 148.5mm;
+            text-align: center !important;
+            padding-top: 52.5mm;
+            width: 90mm;
+            margin-left: 20px;
+            margin-top: 10mm;
+        }
+
+        .grad1 img {
+            -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 1)), to(rgba(0, 0, 0, 0.05)));
+            /* -webkit-mask-image:-webkit-gradient(linear, left top, right top, from(rgba(0,0,0,1)), to(rgba(0,0,0,0.1))); */
+
+        }
+
+        .grad2 img {
+            -webkit-mask-image: -webkit-gradient(linear, right top, left top, from(rgba(0, 0, 0, 1)), to(rgba(0, 0, 0, 0.05)));
+        }
+
+        .FirstPageSize {
+
+            width: 210mm;
+            display: flex;
+            color: hsl(300, 50%, 90%);
+            margin-bottom: 20px !important;
+            margin: 0 auto;
+            justify-content: center;
+            height: 197.5mm !important;
+            /* padding-top: 100mm; */
+        }
+
+        .SecondPageSize {
+
+            width: 210mm;
+            display: flex;
+            /* color: hsl(300, 50%, 90%); */
+            margin-top: 100mm !important;
+            margin-bottom: 90mm !important;
+            margin: 0 auto;
+            justify-content: center;
+            height: 197.5mm !important;
+            /* padding-top: 100mm; */
+        }
+    </style>
+</head>
+
+<body>
+
+    <main>
+        <!-- <header>
+      <div class="content-width">
+        <h1 id="demotext"> Titre de l'histoire</h1>
+
+      </div>
+    </header> -->
+
+        <div class="firstPage break-after keep-together"
+            style="background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7)), url('test.png'); background-repeat: no-repeat; background-size: cover;">
+
+
+            <h1> Titre de l'histoire</h1>
+
+        </div>
+        <div class="content-width">
+            <!-- {% for chapitre in chapitres %} -->
+
+
+            <!-- {% endfor %} -->
+
+            <div class="FirstPageSize break-after keep-together">
+
+                <div
+                    style="background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7)), url('test.png'); background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7)), url('test.png');  background-repeat: no-repeat; background-size: cover;height:  297mm !important;background-position: center;">
+
+                    <!-- {% for p in chapitre.contenu.paragraphes %} -->
+                    <p>
+                        Max était excité à l'idée de pouvoir enfin réaliser son rêve. Il monta dans la machine et appuya
+                        sur
+                        le bouton
+                        de démarrage. Tout à coup, il se sentit aspiré dans un vortex temporel et se retrouva projeté
+                        dans
+                        le passé.
+                    </p>
+
+                </div>
+                </img>
+                <!-- {% endfor %} -->
+            </div>
+
+            <div class="SecondPageSize break-after keep-together">
+
+                <div
+                    style="background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7)), url('test.png'); background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7)), url('test.png');background-repeat: no-repeat; background-size: cover;height:  297mm !important;background-position: center;">
+
+                    <!-- {% for p in chapitre.contenu.paragraphes %} -->
+                    <p>
+                        Max était excité à l'idée de pouvoir enfin réaliser son rêve. Il monta dans la machine et appuya
+                        sur
+                        le bouton
+                        de démarrage. Tout à coup, il se sentit aspiré dans un vortex temporel et se retrouva projeté
+                        dans
+                        le passé.
+                    </p>
+
+                </div>
+                <!-- {% endfor %} -->
+            </div>
+
+            <div class="SecondPageSize break-after keep-together">
+                <div
+                    style="background-image: url('./images/frame/vecteezy_vintage-calligraphic-frame-and-border-illustration_16474998_493.png');background-repeat: no-repeat; background-size:209mm 297mm !important;height: 297mm !important; width: 210mm !important;background-position: center;">
+                    <!-- <h3>chapitre titre</h3> -->
+                    </br>
+                    </br>
+                    <!-- {% for p in chapitre.contenu.paragraphes %} -->
+
+                    <div class="chapterTitleDecoration">
+                        <span class="chapterTitle">
+                            Debut de l'aventure
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="SecondPageSize break-after keep-together">
+            <div class="blockCard">
+                <div class="card">
+                    <div class="grad1">
+                        <img class="imageCard" src="test.png" alt="noperer noferer" />
+                    </div>
+                    <div class="textCard">
+                        <span>
+                            Max était excité à l'idée de pouvoir enfin réaliser son rêve. Il monta dans la machine
+                            et appuya
+                            sur
+                            le bouton
+                            de démarrage. Tout à coup, il se sentit aspiré dans un vortex temporel et se retrouva
+                            projeté
+                            dans
+                            le passé.
+                        </span>
+                    </div>
+                </div>
+
+                <div class="card2">
+
+                    <div class="textCard2">
+                        <span>
+                            Max était excité à l'idée de pouvoir enfin réaliser son rêve. Il monta dans la machine
+                            et appuya
+                            sur
+                            le bouton
+                            de démarrage. Tout à coup, il se sentit aspiré dans un vortex temporel et se retrouva
+                            projeté
+                            dans
+                            le passé.
+                        </span>
+                    </div>
+                    <div class="grad2">
+                        <img class="imageCard2" src="test.png" alt="noperer noferer" />
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="break-after keep-together">
+
+            <div
+                style="background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7)), url('test.png'); background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7)), url('test.png'); background-repeat: no-repeat; background-size: cover;height:  297mm !important;background-position: center;">
+
+                <!-- {% for p in chapitre.contenu.paragraphes %} -->
+                <p>
+                    Max était excité à l'idée de pouvoir enfin réaliser son rêve. Il monta dans la machine et appuya
+                    sur
+                    le bouton
+                    de démarrage. Tout à coup, il se sentit aspiré dans un vortex temporel et se retrouva projeté
+                    dans
+                    le passé.
+                </p>
+
+            </div>
+            </img>
+            <!-- {% endfor %} -->
+        </div>
+
+
+        </div>
+    </main>
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
+
+</html>

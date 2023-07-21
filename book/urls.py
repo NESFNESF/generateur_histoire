@@ -24,7 +24,9 @@ schema_view = get_schema_view(
 urlpatterns = [
     # API URLs
     path('book', WriteBook.as_view()),
-    path('image', GenerateImageMidjourney.as_view()),
+    #path('image', GenerateImageMidjourney.as_view()),
+    path('image', GetWordToPicture.as_view()),
+    path('image/generate', GetWordToPictureGenerate.as_view()),
 
     # Swagger documentation URLs
     path('', schema_view.with_ui('swagger', cache_timeout=0), name='swagger-ui'),

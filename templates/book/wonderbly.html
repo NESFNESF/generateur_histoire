@@ -132,7 +132,7 @@
             margin-left: 50px;
             margin-right: 50px;
             padding-top: 170mm;
-            color: white;
+            color: rgb(255, 255, 255);
             text-align: center !important;
 
 
@@ -314,12 +314,12 @@
         <!-- <header>
               <div class="content-width">
                 <h1 id="demotext"> Titre de l'histoire</h1>
-        
+
               </div>
             </header> -->
 
         <div class="firstPage break-after keep-together"
-            style="background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7)), url('V:/projet/GeHi/API/BookAI/book/app/test.png'); background-repeat: no-repeat; background-size: cover;">
+            style="background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7)), url('{{resumeImage}}'); background-repeat: no-repeat; background-size: cover;">
             <h1>{{title}}</h1>
         </div>
 
@@ -353,7 +353,7 @@
             <div class="FirstPageSize break-after keep-together">
 
                 <div
-                    style="background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7)), url('V:/projet/GeHi/API/BookAI/book/app/test.png'); background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7)), url('V:/projet/GeHi/API/BookAI/book/app/test.png');  background-repeat: no-repeat; background-size: cover;height:  297mm !important;background-position: center;">
+                    style="background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7)), url('{{p.illustration}}'); background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7)), url('{{p.illustration}}');  background-repeat: no-repeat; background-size: cover;height:  297mm !important;background-position: center;">
 
                     </br>
                     </br>
@@ -370,7 +370,7 @@
             <div class="SecondPageSize break-after keep-together">
 
                 <div
-                    style="background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7)), url('V:/projet/GeHi/API/BookAI/book/app/test.png'); background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7)), url('V:/projet/GeHi/API/BookAI/book/app/test.png');  background-repeat: no-repeat; background-size: cover;height:  297mm !important;background-position: center;">
+                    style="background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7)), url('{{p.illustration}}'); background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7)), url('{{p.illustration}}');  background-repeat: no-repeat; background-size: cover;height:  297mm !important;background-position: center;">
 
                     </br>
                     </br>
@@ -389,7 +389,7 @@
                 <div class="blockCard">
                     <div class="card">
                         <div class="grad1">
-                            <img class="imageCard" src='V:/projet/GeHi/API/BookAI/book/app/test.png' alt="noperer noferer" />
+                            <img class="imageCard" src="{{p.illustration}}" alt="noperer noferer" />
                         </div>
                         <div class="textCard">
                             <span>
@@ -404,10 +404,10 @@
                             <span>
                                 {{chapter.paragraphs.2.text}}
                             </span>
-                    
+
                         </div>
                         <div class="grad2">
-                            <img class="imageCard2" src="V:/projet/GeHi/API/BookAI/book/app/test.png" alt="noperer noferer" />
+                            <img class="imageCard2" src="{{p.illustration}}" alt="noperer noferer" />
                         </div>
                     </div>
                 </div>
@@ -426,3 +426,4 @@
 <script src="https:/cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
 
 </html>
+

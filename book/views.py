@@ -1,5 +1,6 @@
 import random
 import string
+import uuid
 from datetime import time
 
 import openai
@@ -34,7 +35,10 @@ token = ""
 URL = "https://api.thenextleg.io/v2/"
 nameButton = 'U3'
 webHookUrl = "https://2051-154-72-160-142.eu.ngrok.io/image/"
-
+KEY_LEONARDO = "64a2692f-9ab7-44c9-b056-acafa9f5be50"
+HOST_LEONARDO = "https://cloud.leonardo.ai/api/rest/v1/"
+HEADER_LEONARDO = {"accept": "application/json", "content-type": "application/json",
+                   "authorization": "Bearer " + KEY_LEONARDO}
 
 def downloadImage(url):
     base2 = os.path.join(BASE1, 'images')
@@ -90,6 +94,52 @@ def extractJSON(value):
     return value[firstIndex: lastIndex + 1]
 
 
+def leonardoGenerate(prompt):
+    payload = {"prompt": prompt}
+    data = requests.post(HOST_LEONARDO + "generations", json=payload, headers=HEADER_LEONARDO)
+    data2 = data.json()
+    return data2["sdGenerationJob"]["generationId"]
+
+def leonardoGet(generationId):
+    data3 = requests.get(HOST_LEONARDO + "generations/" + generationId, headers=HEADER_LEONARDO)
+    data4 = data3.json()
+    img = []
+    for dt in data4['generations_by_pk']['generated_images']:
+        img.append(dt['url'])
+
+    return img
+
+def save_json_to_folder(data,filename,path):
+    folder_path = os.path.join(path)
+    if not os.path.exists(folder_path):
+        os.makedirs(folder_path)
+    file_path = os.path.join(folder_path,str(uuid.uuid4()) + filename)
+    with open(file_path, 'w', encoding='utf-8') as json_file:
+        json.dump(data, json_file, ensure_ascii=False, indent=4)
+
+    print({"message": "JSON data saved successfully."})
+
+
+from pathlib import Path
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+
+def read_json_files_in_folder():
+    json_data = []
+    folder_path = os.path.join(BASE_DIR,'static/datas/json')
+    for filename in os.listdir(folder_path):
+        if filename.endswith(".json"):
+            file_path = os.path.join(folder_path, filename)
+            with open(file_path, "r", encoding="utf-8") as json_file:
+                try:
+                    data = json.load(json_file)
+                    json_data.append(data)
+                except json.JSONDecodeError:
+                    print(f"Unable to parse JSON file: {file_path}")
+                    continue
+    return json_data
+
+
 class WriteBook(APIView):
     @swagger_auto_schema(
         request_body=openapi.Schema(
@@ -102,15 +152,12 @@ class WriteBook(APIView):
         responses={201: "Load Success", 400: "Bad Request"},
         operation_description=" Get Word"
     )
+
     def post(self, request, *args, **kwargs):
+
         input = request.data.get('texte')
-        # input = request.data['content']
-        print(f"voici l'input {input}")
+        print("début de la génération pour l'histoire :" + str(input))
         openai.api_key = API_KEY
-        KEY_LEONARDO = "64a2692f-9ab7-44c9-b056-acafa9f5be50"
-        HOST_LEONARDO = "https://cloud.leonardo.ai/api/rest/v1/"
-        HEADER_LEONARDO = {"accept": "application/json", "content-type": "application/json",
-                           "authorization": "Bearer " + KEY_LEONARDO}
         message_history = [{"role": "user", "content": "oublie toutes les instructions que tu as recu jusqu'a present"},
                            #                    {"role": "assistant", "content": f"OK"},
                            {"role": "user", "content": "maintenant tu es bot utilise pour ecrire des livres pour enfant,\
@@ -121,7 +168,6 @@ class WriteBook(APIView):
                                                    un chapitre est subdivise en paragraphes et chaque paragraphe est un element l'attribut paragraphs, qui est un tableau \
                                     si tu as compris ecris OK"},
                            {"role": "assistant", "content": "OK"},
-                           #  {"role": "assistant", "content": "faites une description de votre livre"},
                            {"role": "assistant",
                             "content": "salut"},
                            {"role": "system",
@@ -132,13 +178,8 @@ class WriteBook(APIView):
         message_history.append(
             {"role": "user",
              "content": "ne me pose pas de question ecris juste une seule histoire au format JSON {title:..,resumeHistory:.., chapters:[{title:..,paragraphs: [{text:...,illustration:...}],resume:..}]} j'insiste, l'histoire devra parler de [" + str(
-                 input) + "] en 5 chapitres et chaque chapitre doit avoir minimum 5 paragraphes , l'histoire ne doit pas avoir une suite elle doit se terminée au dernier chapitre. Le contenu de chaque paragraphes devra etre une narration detaillee de plus de 1000 mots avec un vocabulaire émotif et dans ta reponse je ne veux voir que l'histoire au format JSON tout respectant les specifications que j'ai donne rien d'autre et les titres des chapitres qui doivent etre des mots ne doivent pas etre numerotes. "})
+                 input) + "] enntre 6 et 9 chapitres et chaque chapitre doit avoir minimum 5 paragraphes , l'histoire ne doit pas avoir une suite elle doit se terminée au dernier chapitre. Le contenu de chaque paragraphes devra etre une narration detaillee de plus de 1000 mots avec un vocabulaire émotif et dans ta reponse je ne veux voir que l'histoire au format JSON tout respectant les specifications que j'ai donne rien d'autre et les titres des chapitres qui doivent etre des mots ne doivent pas etre numerotes. "})
 
-        print("---|>")
-        payload = {"prompt": input}
-        data = requests.post(HOST_LEONARDO + "generations", json=payload, headers=HEADER_LEONARDO)
-        data2 = data.json()
-        print(data2)
         completion = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",  # 10x cheaper than davinci, and better. $0.002 per 1k tokens
             messages=message_history,
@@ -148,28 +189,25 @@ class WriteBook(APIView):
             frequency_penalty=0.2,
             presence_penalty=0
         )
-        # Just the reply:
-        # .replace('```python', '<pre>').replace('```', '</pre>')
-        reply_content = completion.choices[0].message.content
-        # i = 0
-        reply_content = json.loads(reply_content)
-        print(reply_content)  # .split('\n')[-1])
-        # message_history.append(
-        #     {"role": "assistant", "content": f"{reply_content}"})
-        idGenerate = data2["sdGenerationJob"]["generationId"]
-        # idGenerate = request.data.get('idGenerate')
 
-        data3 = requests.get(HOST_LEONARDO + "generations/" + idGenerate, headers=HEADER_LEONARDO)
-        data4 = data3.json()
-        img = []
-        for dt in data4['generations_by_pk']['generated_images']:
-            img.append(dt['url'])
+        reply_content = completion.choices[0].message.content
+
+        reply_content = json.loads(reply_content)
+
+        print("génération terminée !, nous allons maintenant générér les illustrations appropriée pour chaque paragraphe")
+        for rp in reply_content['chapters']:
+            for pr1 in rp['paragraphs']:
+                pr1['illustration'] = leonardoGenerate(pr1['text'])
+
+        print( "génération terminée !, nous allons maintenant récupérer les illustrations générer pour chaque paragraphe")
 
         for rp in reply_content['chapters']:
             for pr1 in rp['paragraphs']:
+                img = leonardoGet( pr1['illustration'])
                 pr1['illustration'] = img[random.randint(0, len(img) - 1)]
 
-        print(reply_content)
+        print("génération terminée !, nous allons maintenant générér le pdf")
+
         # Transformer le texte en une chaîne de caractères valide pour le nom de fichier
         text = reply_content["title"]
         text = text.translate(str.maketrans('', '', string.punctuation))
@@ -178,11 +216,7 @@ class WriteBook(APIView):
         text = text.lower()
 
         template = get_template('book/wonderbly.html')
-
         html = template.render(reply_content)
-
-        # Utiliser la configuration personnalisée lors de la génération du PDF
-
 
         # Utiliser directement la chaîne HTML au lieu d'une variable temporaire
         file_name = f'{text}.pdf'
@@ -200,7 +234,11 @@ class WriteBook(APIView):
         }
         pdfkit.from_string(html, pdf_path, options=options)
 
-        # Retourner la réponse avec le fichier PDF
+        try:
+            save_json_to_folder(reply_content, file_name, "../static/datas/json")
+        except:
+            pass
+
         return FileResponse(open(pdf_path, 'rb'), filename=file_name, content_type='application/pdf')
 
 
@@ -274,6 +312,55 @@ class GeneratePDF(APIView):
     def get(self, request, *args, **kwargs):
         pdf = render_to_pdf('sample.html')
         return HttpResponse(pdf, content_type='application/pdf')
+
+
+
+class GenerateStory(APIView):
+    @swagger_auto_schema(
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            properties={
+                'path': openapi.Schema(type=openapi.TYPE_STRING, format=openapi.FORMAT_DOUBLE),
+            },
+            required=['path']
+        ),
+        responses={201: "Load Success", 400: "Bad Request"},
+        operation_description=" Get Word"
+    )
+    def post(self, request):
+        path = request.data.get('path')
+        datas = read_json_files_in_folder()
+        text = datas[random.randint(0, len(datas) - 1)]["title"]
+        text = text.translate(str.maketrans('', '', string.punctuation))
+        text = text.replace(' ', '_')
+        text = text.replace("'", '')
+        text = text.lower()
+
+        template = get_template('book/wonderbly.html')
+        html = template.render( datas[0])
+
+        # Utiliser directement la chaîne HTML au lieu d'une variable temporaire
+        file_name = f'{text}.pdf'
+        pdf_path = file_name  # Utilisez le chemin approprié pour le répertoire de stockage des fichiers statiques
+
+        options = {
+            'page-size': 'A4',
+            'disable-smart-shrinking': '',
+            'enable-local-file-access': '',
+            'margin-top': '0in',
+            'margin-right': '0in',
+            'margin-bottom': '0in',
+            'margin-left': '0in',
+            'encoding': "UTF-8",
+        }
+        pdfkit.from_string(html, pdf_path, options=options)
+
+
+        FileResponse(open(pdf_path, 'rb'), filename=file_name, content_type='application/pdf')
+
+
+
+
 
 
 class GetWordToPictureGenerate(APIView):

@@ -176,8 +176,6 @@ def read_json_files_in_folder(path):
                 except json.JSONDecodeError:
                     print(f"Unable to parse JSON file: {file_path}")
                     continue
-
-
     return json_data
 
 

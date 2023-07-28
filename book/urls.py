@@ -24,6 +24,7 @@ schema_view = get_schema_view(
 urlpatterns = [
     # API URLs
     path('book', WriteBook.as_view()),
+    path('book/json', GenerateStory.as_view()),
     #path('image', GenerateImageMidjourney.as_view()),
     path('image', GetWordToPicture.as_view()),
     path('image/generate', GetWordToPictureGenerate.as_view()),

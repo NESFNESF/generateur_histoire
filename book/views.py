@@ -98,14 +98,20 @@ def leonardoGenerate(prompt):
     payload = {"prompt": prompt}
     data = requests.post(HOST_LEONARDO + "generations", json=payload, headers=HEADER_LEONARDO)
     data2 = data.json()
-    return data2["sdGenerationJob"]["generationId"]
+    print(data2)
+    if data2["sdGenerationJob"]:
+        return data2["sdGenerationJob"]["generationId"]
+    else:
+        return 0
+
 
 def leonardoGet(generationId):
     data3 = requests.get(HOST_LEONARDO + "generations/" + generationId, headers=HEADER_LEONARDO)
     data4 = data3.json()
     img = []
-    for dt in data4['generations_by_pk']['generated_images']:
-        img.append(dt['url'])
+    if data4['generations_by_pk'] :
+        for dt in data4['generations_by_pk']['generated_images']:
+            img.append(dt['url'])
 
     return img
 
@@ -194,18 +200,27 @@ class WriteBook(APIView):
 
         reply_content = json.loads(reply_content)
 
+        print(reply_content)
+
         print("génération terminée !, nous allons maintenant générér les illustrations appropriée pour chaque paragraphe")
         for rp in reply_content['chapters']:
             for pr1 in rp['paragraphs']:
                 pr1['illustration'] = leonardoGenerate(pr1['text'])
 
+        print(reply_content)
         print( "génération terminée !, nous allons maintenant récupérer les illustrations générer pour chaque paragraphe")
 
+
+        tab = []
         for rp in reply_content['chapters']:
             for pr1 in rp['paragraphs']:
-                img = leonardoGet( pr1['illustration'])
-                pr1['illustration'] = img[random.randint(0, len(img) - 1)]
-
+                if pr1['illustration'] is 0:
+                    pr1['illustration'] = tab[random.randint(0, len(tab) - 1)]
+                else:
+                    img = leonardoGet(pr1['illustration'])
+                    tab = tab + img
+                    pr1['illustration'] = img[random.randint(0, len(img) - 1)]
+        print(reply_content)
         print("génération terminée !, nous allons maintenant générér le pdf")
 
         # Transformer le texte en une chaîne de caractères valide pour le nom de fichier

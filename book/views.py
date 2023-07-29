@@ -96,24 +96,30 @@ def extractJSON(value):
 
 def leonardoGenerate(prompt):
     payload = {"prompt": prompt}
-    data = requests.post(HOST_LEONARDO + "generations", json=payload, headers=HEADER_LEONARDO)
-    data2 = data.json()
-    print(data2)
-    if data2["sdGenerationJob"]:
-        return data2["sdGenerationJob"]["generationId"]
-    else:
+    try:
+        data = requests.post(HOST_LEONARDO + "generations", json=payload, headers=HEADER_LEONARDO)
+        data2 = data.json()
+        print(data2)
+        if data2["sdGenerationJob"]:
+            return data2["sdGenerationJob"]["generationId"]
+        else:
+            return 0
+    except :
         return 0
 
 
-def leonardoGet(generationId):
-    data3 = requests.get(HOST_LEONARDO + "generations/" + generationId, headers=HEADER_LEONARDO)
-    data4 = data3.json()
-    img = []
-    if data4['generations_by_pk'] :
-        for dt in data4['generations_by_pk']['generated_images']:
-            img.append(dt['url'])
 
-    return img
+def leonardoGet(generationId):
+    try:
+        data3 = requests.get(HOST_LEONARDO + "generations/" + generationId, headers=HEADER_LEONARDO)
+        data4 = data3.json()
+        img = []
+        if data4['generations_by_pk'] :
+            for dt in data4['generations_by_pk']['generated_images']:
+                img.append(dt['url'])
+        return img
+    except :
+        return []
 
 def save_json_to_folder(data,filename,path):
     folder_path = os.path.join(path)
@@ -184,7 +190,7 @@ class WriteBook(APIView):
         message_history.append(
             {"role": "user",
              "content": "ne me pose pas de question ecris juste une seule histoire au format JSON {title:..,resumeHistory:.., chapters:[{title:..,paragraphs: [{text:...,illustration:...}],resume:..}]} j'insiste, l'histoire devra parler de [" + str(
-                 input) + "] enntre 6 et 9 chapitres et chaque chapitre doit avoir minimum 5 paragraphes , l'histoire ne doit pas avoir une suite elle doit se terminée au dernier chapitre. Le contenu de chaque paragraphes devra etre une narration detaillee de plus de 1000 mots avec un vocabulaire émotif et dans ta reponse je ne veux voir que l'histoire au format JSON tout respectant les specifications que j'ai donne rien d'autre et les titres des chapitres qui doivent etre des mots ne doivent pas etre numerotes. "})
+                 input) + "] enntre 2 et 4 chapitres et chaque chapitre doit avoir 2 paragraphes , l'histoire ne doit pas avoir une suite elle doit se terminée au dernier chapitre. Le contenu de chaque paragraphes devra etre une narration detaillee de plus de 1000 mots avec un vocabulaire émotif et dans ta reponse je ne veux voir que l'histoire au format JSON tout respectant les specifications que j'ai donne rien d'autre et les titres des chapitres qui doivent etre des mots ne doivent pas etre numerotes. "})
 
         completion = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",  # 10x cheaper than davinci, and better. $0.002 per 1k tokens
@@ -210,7 +216,6 @@ class WriteBook(APIView):
         print(reply_content)
         print( "génération terminée !, nous allons maintenant récupérer les illustrations générer pour chaque paragraphe")
 
-
         tab = []
         for rp in reply_content['chapters']:
             for pr1 in rp['paragraphs']:
@@ -218,8 +223,11 @@ class WriteBook(APIView):
                     pr1['illustration'] = tab[random.randint(0, len(tab) - 1)]
                 else:
                     img = leonardoGet(pr1['illustration'])
-                    tab = tab + img
-                    pr1['illustration'] = img[random.randint(0, len(img) - 1)]
+                    if not img:
+                        pr1['illustration'] = tab[random.randint(0, len(tab) - 1)]
+                    else:
+                        tab = tab + img
+                        pr1['illustration'] = img[random.randint(0, len(img) - 1)]
         print(reply_content)
         print("génération terminée !, nous allons maintenant générér le pdf")
 

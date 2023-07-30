@@ -95,10 +95,10 @@ def extractJSON(value):
 
 
 def leonardoGenerate(prompt):
-    positive_prompt = "génère des images qui font références à < "+prompt+" >. En plus de ça les images doivent être en dessin si possible en 3d dans le contexte des comptes et tres professionnels"
-    negative_prompt = "two heads, two faces, plastic, too long neck, Deformed, blurry, bad anatomy, bad eyes, crossed eyes, disfigured, poorly drawn face, mutation, mutated, ((extra limb)), ugly, poorly drawn hands, missing limb, blurry, floating limbs, disconnected limbs, malformed hands, blur, out of focus, long neck, long body, ((((mutated hands and fingers)))), (((out of frame))), blender, doll, cropped, low-res, close-up, poorly-drawn face, out of frame double, ugly, disfigured, too many fingers, deformed, repetitive, black and white, grainy, extra limbs, bad anatomy, smooth skin, deformed, extra limbs, extra fingers, mutated hands, bad proportions, blind, bad eyes, ugly eyes, dead eyes, out of shot, out of focus, monochrome, noisy, text, writing, logo, oversaturation,over shadow"
+    positive_prompt = "génère des images qui font références à < "+prompt+" >. En plus de ça l' image doivent être en dessin"
+    #negative_prompt = "two heads, two faces, plastic, too long neck, Deformed, blurry, bad anatomy, bad eyes, crossed eyes, disfigured, poorly drawn face, mutation, mutated, ((extra limb)), ugly, poorly drawn hands, missing limb, blurry, floating limbs, disconnected limbs, malformed hands, blur, out of focus, long neck, long body, ((((mutated hands and fingers)))), (((out of frame))), blender, doll, cropped, low-res, close-up, poorly-drawn face, out of frame double, ugly, disfigured, too many fingers, deformed, repetitive, black and white, grainy, extra limbs, bad anatomy, smooth skin, deformed, extra limbs, extra fingers, mutated hands, bad proportions, blind, bad eyes, ugly eyes, dead eyes, out of shot, out of focus, monochrome, noisy, text, writing, logo, oversaturation,over shadow"
     payload = {"prompt": positive_prompt,
-                "negative_prompt":negative_prompt,
+               # "negative_prompt":negative_prompt,
                 "sd_version": "v2",
                 "num_images": 2
                 #"width": 500,

@@ -11,12 +11,12 @@
             font-family: "happy-holiday";
             src: url("V:/projet/GeHi/API/BookAI/book/app/fonts/happy-holiday.regular.ttf");
         }
-        
+
         @font-face {
             font-family: "Henny Penny";
             src: url("V:/projet/GeHi/API/BookAI/book/app/fonts/HennyPenny-Regular.ttf");
         }
-        
+
         @font-face {
             font-family: "luna-love-display";
             src: url("V:/projet/GeHi/API/BookAI/book/app/fonts/luna-love-display-personal.display.ttf");
@@ -232,7 +232,7 @@
             display: -webkit-box;
             flex-direction: row;
             width: 210mm;
-            height: 148.5mm;
+           /* height: 148.5mm;*/
         }
 
         .textCard {
@@ -252,7 +252,7 @@
             display: flex;
             display: -webkit-box;
             width: 210mm;
-            height: 148.5mm;
+          /*  height: 148.5mm;*/
         }
 
 
@@ -318,16 +318,13 @@
               </div>
             </header> -->
 
-        <div class="firstPage break-after keep-together"
+    <!--    <div class="firstPage break-after keep-together"
             style="background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7)), url('{{resumeImage}}'); background-repeat: no-repeat; background-size: cover;">
             <h1>{{title}}</h1>
-        </div>
+        </div>-->
 
 
         <div class="content-width">
-            {% for chapter in chapters %}
-
-            {% if forloop.counter|divisibleby:4 %}
             <div class="SecondPageSize break-after keep-together">
                 <div
                     style="background-image: url('V:/projet/GeHi/API/BookAI/book/app/images/frame/vecteezy_vintage-calligraphic-frame-and-border-illustration_16474998_493.png');background-repeat: no-repeat; background-size:209mm 297mm !important;height: 297mm !important; width: 210mm !important;background-position: center;">
@@ -337,18 +334,55 @@
 
                     <div class="chapterTitleDecoration">
                         <span class="chapterTitle">
-                            {{chapter.title}}
+                            {{title}}
                         </span>
                     </div>
 
 
                 </div>
             </div>
-            {% endif %}
+            <div class="FirstPageSize break-after keep-together">
+
+                <div
+                    style="background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7)), url('{{resumeImage}}'); background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7)), url('{{resumeImage}}');  background-repeat: no-repeat; background-size: cover;height:  297mm !important;background-position: center;">
+
+                    </br>
+                    </br>
+
+                    <p >
+                        {{resumeHistory}}
+                    </p>
+                </div>
+            </div>
+
+
+            {% for chapter in chapters %}
+
+                    <div class="content-width">
+
+            <div class="FirstPageSize break-after keep-together">
+
+                <div>
+
+                    </br>
+                    </br>
+
+                    <h3 style="" >
+                        {{chapter.title}}
+                    </h3>
+                </div>
+            </div>
 
             {% for p in chapter.paragraphs %}
+<!--
+
+
 
             {% if not forloop.parentloop.counter|divisibleby:3 or forloop.counter != 2 %}
+
+
+
+
             {% if forloop.counter0 == 0 and forloop.parentloop.counter == 1 %}
             <div class="FirstPageSize break-after keep-together">
 
@@ -365,7 +399,12 @@
             </div>
             {% endif %}
 
+
+
+
             {% if forloop.counter0 != 0 or forloop.parentloop.counter != 1 %}
+
+
             {% if forloop.counter0 != 2 %}
             <div class="SecondPageSize break-after keep-together">
 
@@ -381,14 +420,40 @@
                 </div>
             </div>
             {% endif %}
-            {% endif %}
+
+
+
             {% endif %}
 
-            {% if forloop.parentloop.counter|divisibleby:3 and forloop.counter == 2 %}
+
+            {% endif %}
+
+            {% if forloop.parentloop.counter|divisibleby:3 and forloop.counter == 2 %}-->
+
+                        {% if forloop.counter%2==0 %}
+            <div class="SecondPageSize break-after keep-together">
+                <div class="blockCard">
+                    <div class="card2">
+
+                        <div class="textCard2">
+                            <span>
+                                 {{p.text}}
+                            </span>
+
+                        </div>
+                        <div class="">
+                            <img class="imageCard2" src="{{p.illustration}}" alt="noperer noferer" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+                        {% endif %}
+
+                        {% if forloop.counter%2!=0 %}
             <div class="SecondPageSize break-after keep-together">
                 <div class="blockCard">
                     <div class="card">
-                        <div class="grad1">
+                        <div class="">
                             <img class="imageCard" src="{{p.illustration}}" alt="noperer noferer" />
                         </div>
                         <div class="textCard">
@@ -397,28 +462,22 @@
                             </span>
                         </div>
                     </div>
-
-                    <div class="card2">
-
-                        <div class="textCard2">
-                            <span>
-                                {{chapter.paragraphs.2.text}}
-                            </span>
-
-                        </div>
-                        <div class="grad2">
-                            <img class="imageCard2" src="{{p.illustration}}" alt="noperer noferer" />
-                        </div>
-                    </div>
                 </div>
-
             </div>
-            {% endif %}
+                        {% endif %}
+            {% endfor %}
+
+
+
+
+
+
+
 
 
             {% endfor %}
-            {% endfor %}
 
+        </div>
         </div>
     </main>
 </body>

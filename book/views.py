@@ -13,7 +13,6 @@ from rest_framework import status
 from rest_framework.response import Response
 
 from rest_framework.views import APIView
-from wkhtmltopdf.views import PDFTemplateView
 
 from .utils import render_to_pdf
 from django.http import HttpResponse

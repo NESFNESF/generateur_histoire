@@ -430,7 +430,7 @@
 
             {% if forloop.parentloop.counter|divisibleby:3 and forloop.counter == 2 %}-->
 
-                        {% if forloop.counter%2==0 %}
+                        {% if forloop.counter|divisibleby:2 %}
             <div class="SecondPageSize break-after keep-together">
                 <div class="blockCard">
                     <div class="card2">
@@ -447,9 +447,7 @@
                     </div>
                 </div>
             </div>
-                        {% endif %}
-
-                        {% if forloop.counter%2!=0 %}
+                        {% else %}
             <div class="SecondPageSize break-after keep-together">
                 <div class="blockCard">
                     <div class="card">
@@ -466,12 +464,6 @@
             </div>
                         {% endif %}
             {% endfor %}
-
-
-
-
-
-
 
 
 

@@ -386,8 +386,8 @@ class GenerateStory(APIView):
         }
         pdfkit.from_string(html, pdf_path, options=options)
 
-
-        FileResponse(open(pdf_path, 'rb'), filename=file_name, content_type='application/pdf')
+        return render(request,'book/wonderbly.html',context=datas[0] )
+        #FileResponse(open(pdf_path, 'rb'), filename=file_name, content_type='application/pdf')
 
 
 
@@ -442,4 +442,5 @@ class GetWordToPicture(APIView):
         img = []
         for dt in data4['generations_by_pk']['generated_images']:
             img.append(dt['url'])
+
         return Response(img, status=status.HTTP_200_OK)

@@ -374,61 +374,6 @@
             </div>
 
             {% for p in chapter.paragraphs %}
-<!--
-
-
-
-            {% if not forloop.parentloop.counter|divisibleby:3 or forloop.counter != 2 %}
-
-
-
-
-            {% if forloop.counter0 == 0 and forloop.parentloop.counter == 1 %}
-            <div class="FirstPageSize break-after keep-together">
-
-                <div
-                    style="background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7)), url('{{p.illustration}}'); background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7)), url('{{p.illustration}}');  background-repeat: no-repeat; background-size: cover;height:  297mm !important;background-position: center;">
-
-                    </br>
-                    </br>
-
-                    <p >
-                        {{p.text}}
-                    </p>
-                </div>
-            </div>
-            {% endif %}
-
-
-
-
-            {% if forloop.counter0 != 0 or forloop.parentloop.counter != 1 %}
-
-
-            {% if forloop.counter0 != 2 %}
-            <div class="SecondPageSize break-after keep-together">
-
-                <div
-                    style="background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7)), url('{{p.illustration}}'); background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7)), url('{{p.illustration}}');  background-repeat: no-repeat; background-size: cover;height:  297mm !important;background-position: center;">
-
-                    </br>
-                    </br>
-
-                    <p >
-                        {{p.text}}
-                    </p>
-                </div>
-            </div>
-            {% endif %}
-
-
-
-            {% endif %}
-
-
-            {% endif %}
-
-            {% if forloop.parentloop.counter|divisibleby:3 and forloop.counter == 2 %}-->
 
                         {% if forloop.counter|divisibleby:2 %}
             <div class="SecondPageSize break-after keep-together">

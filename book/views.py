@@ -12,6 +12,8 @@ from pdfkit.configuration import Configuration
 from rest_framework import status
 from rest_framework.response import Response
 
+
+
 from rest_framework.views import APIView
 
 from .utils import render_to_pdf
@@ -27,6 +29,10 @@ from rest_framework import generics
 import pdfkit
 from django.http import FileResponse
 from django.template.loader import get_template, render_to_string
+
+from io import BytesIO
+
+from xhtml2pdf import pisa
 
 BASE1 = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 API_KEY = "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"  # key for chatGPT
@@ -44,6 +50,17 @@ def downloadImage(url):
     file_name = wget.download(url, base2)
     print('Image Successfully Downloaded: ', file_name)
 
+
+def render_to_pdf(template_src, context_dict={}):
+    template = get_template(template_src)
+    html  = template.render(context_dict)
+    return render(template_src)
+    result = BytesIO()
+    pdf = pisa.pisaDocument(BytesIO(html.encode("ISO-8859-1")), result)
+    print(result.getvalue())
+    if pdf.err:
+        return HttpResponse("Invalid PDF", status_code=400, content_type='text/plain')
+    return Response(result.getvalue(), content_type='application/pdf')
 
 def generateImage(description, previousUrl=""):
     """cette fonction prend 2 parametres la premiere est le prompt dont on souhaite generer l'illustration 
@@ -99,7 +116,9 @@ def leonardoGenerate(prompt):
     payload = {"prompt": positive_prompt,
                # "negative_prompt":negative_prompt,
                 "sd_version": "v2",
-                "num_images": 2
+                "num_images": 6,
+               "presetStyle":"LEONARDO",
+               "promptMagic":True
                 #"width": 500,
                 #"height": 500
                }
@@ -197,7 +216,7 @@ class WriteBook(APIView):
         message_history.append(
             {"role": "user",
              "content": "ne me pose pas de question ecris juste une seule histoire au format JSON {title:..,resumeHistory:.., chapters:[{title:..,paragraphs: [{text:...,illustration:...}],resume:..}]} j'insiste, l'histoire devra parler de [" + str(
-                 input) + "] enntre 2 et 4 chapitres et chaque chapitre doit avoir 2 paragraphes , l'histoire ne doit pas avoir une suite elle doit se terminée au dernier chapitre. Le contenu de chaque paragraphes devra etre une narration detaillee de plus de 1000 mots avec un vocabulaire émotif et dans ta reponse je ne veux voir que l'histoire au format JSON tout respectant les specifications que j'ai donne rien d'autre et les titres des chapitres qui doivent etre des mots ne doivent pas etre numerotes. "})
+                 input) + "] entre 2 et 5 chapitres et chaque chapitre doit avoir 2 à 4 paragraphes , l'histoire ne doit pas avoir une suite elle doit se terminée au dernier chapitre. Le contenu de chaque paragraphes devra etre une narration detaillee de plus de 1000 mots avec un vocabulaire émotif et dans ta reponse je ne veux voir que l'histoire au format JSON tout respectant les specifications que j'ai donne rien d'autre et les titres des chapitres qui doivent etre des mots ne doivent pas etre numerotes. "})
 
         completion = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",  # 10x cheaper than davinci, and better. $0.002 per 1k tokens
@@ -217,8 +236,9 @@ class WriteBook(APIView):
 
         print("génération terminée !, nous allons maintenant générér les illustrations appropriée pour chaque paragraphe")
         for rp in reply_content['chapters']:
+            rp['illustration'] = leonardoGenerate(rp['title'])
             for pr1 in rp['paragraphs']:
-                text ="titre : "+ input+".Et qui reflète le texte suivant :" + pr1['text']
+                text ="titre : "+ rp['title']+".Et qui reflète le texte suivant :" + pr1['text']
                 pr1['illustration'] = leonardoGenerate(text)
 
         print(reply_content)
@@ -226,6 +246,16 @@ class WriteBook(APIView):
 
         tab = []
         for rp in reply_content['chapters']:
+            if rp['illustration'] is 0:
+                rp['illustration'] = tab[random.randint(0, len(tab) - 1)]
+            else:
+                img = leonardoGet(rp['illustration'])
+                if not img:
+                    rp['illustration'] = tab[random.randint(0, len(tab) - 1)]
+                else:
+                    tab = tab + img
+                    rp['illustration'] = img[random.randint(0, len(img) - 1)]
+
             for pr1 in rp['paragraphs']:
                 if pr1['illustration'] is 0:
                     pr1['illustration'] = tab[random.randint(0, len(tab) - 1)]
@@ -238,39 +268,20 @@ class WriteBook(APIView):
                         pr1['illustration'] = img[random.randint(0, len(img) - 1)]
         print(reply_content)
         print("génération terminée !, nous allons maintenant générér le pdf")
-
-        # Transformer le texte en une chaîne de caractères valide pour le nom de fichier
-        text = reply_content["title"]
-        text = text.translate(str.maketrans('', '', string.punctuation))
-        text = text.replace(' ', '_')
-        text = text.replace("'", '')
-        text = text.lower()
-
-        template = get_template('book/wonderbly.html')
-        html = template.render(reply_content)
-
-        # Utiliser directement la chaîne HTML au lieu d'une variable temporaire
-        file_name = f'{text}.pdf'
-        pdf_path = file_name  # Utilisez le chemin approprié pour le répertoire de stockage des fichiers statiques
-
-        options = {
-            'page-size': 'A4',
-            'disable-smart-shrinking': '',
-            'enable-local-file-access': '',
-            'margin-top': '0in',
-            'margin-right': '0in',
-            'margin-bottom': '0in',
-            'margin-left': '0in',
-            'encoding': "UTF-8",
-        }
-        pdfkit.from_string(html, pdf_path, options=options)
-
         try:
+            text = reply_content["title"]
+            text = text.translate(str.maketrans('', '', string.punctuation))
+            text = text.replace(' ', '_')
+            text = text.replace("'", '')
+            text = text.lower()
+            # Utiliser directement la chaîne HTML au lieu d'une variable temporaire
+            file_name = f'{text}.json'
             save_json_to_folder(reply_content, file_name, "../static/datas/json")
         except:
             pass
 
-        return FileResponse(open(pdf_path, 'rb'), filename=file_name, content_type='application/pdf')
+        return generatePDF('book/index.html', reply_content)
+
 
 
 class GenerateImageMidjourney(generics.ListAPIView):
@@ -347,50 +358,39 @@ class GeneratePDF(APIView):
 
 
 class GenerateStory(APIView):
-    @swagger_auto_schema(
-        request_body=openapi.Schema(
-            type=openapi.TYPE_OBJECT,
-            properties={
-                'path': openapi.Schema(type=openapi.TYPE_STRING, format=openapi.FORMAT_DOUBLE),
-            },
-            required=['path']
-        ),
-        responses={201: "Load Success", 400: "Bad Request"},
-        operation_description=" Get Word"
-    )
-    def post(self, request):
-        path = request.data.get('path')
+
+    def get(self, request):
+        #path = request.data.get('path')
         datas = read_json_files_in_folder()
-        text = datas[random.randint(0, len(datas) - 1)]["title"]
-        text = text.translate(str.maketrans('', '', string.punctuation))
-        text = text.replace(' ', '_')
-        text = text.replace("'", '')
-        text = text.lower()
 
-        template = get_template('book/wonderbly.html')
-        html = template.render( datas[0])
-
-        # Utiliser directement la chaîne HTML au lieu d'une variable temporaire
-        file_name = f'{text}.pdf'
-        pdf_path = file_name  # Utilisez le chemin approprié pour le répertoire de stockage des fichiers statiques
-
-        options = {
-            'page-size': 'A4',
-            'disable-smart-shrinking': '',
-            'enable-local-file-access': '',
-            'margin-top': '0in',
-            'margin-right': '0in',
-            'margin-bottom': '0in',
-            'margin-left': '0in',
-            'encoding': "UTF-8",
-        }
-        pdfkit.from_string(html, pdf_path, options=options)
-
-        return render(request,'book/wonderbly.html',context=datas[0] )
-        #FileResponse(open(pdf_path, 'rb'), filename=file_name, content_type='application/pdf')
+        return generatePDF('book/index.html', datas[1])
 
 
 
+def generatePDF(template_src,data):
+    text = data["title"]
+    text = text.translate(str.maketrans('', '', string.punctuation))
+    text = text.replace(' ', '_')
+    text = text.replace("'", '')
+    text = text.lower()
+    template = get_template(template_src)
+    html = template.render(data)
+    # Utiliser directement la chaîne HTML au lieu d'une variable temporaire
+    file_name = f'{text}.pdf'
+    pdf_path = file_name  # Utilisez le chemin approprié pour le répertoire de stockage des fichiers statiques
+
+    options = {
+        'page-size': 'A4',
+        'disable-smart-shrinking': '',
+        'enable-local-file-access': '',
+        'margin-top': '0in',
+        'margin-right': '0in',
+        'margin-bottom': '0in',
+        'margin-left': '0in',
+        'encoding': "UTF-8",
+    }
+    pdf = pdfkit.from_string(html, pdf_path, options=options)
+    return FileResponse(open(pdf_path, 'rb'), filename=file_name, content_type='application/pdf')
 
 
 

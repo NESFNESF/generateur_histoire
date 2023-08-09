@@ -111,7 +111,7 @@ def extractJSON(value):
 
 
 def leonardoGenerate(prompt):
-    positive_prompt = "génère des images qui font références à < "+prompt+" >. En plus de ça l' image doivent être en dessin"
+    positive_prompt = prompt
     #negative_prompt = "two heads, two faces, plastic, too long neck, Deformed, blurry, bad anatomy, bad eyes, crossed eyes, disfigured, poorly drawn face, mutation, mutated, ((extra limb)), ugly, poorly drawn hands, missing limb, blurry, floating limbs, disconnected limbs, malformed hands, blur, out of focus, long neck, long body, ((((mutated hands and fingers)))), (((out of frame))), blender, doll, cropped, low-res, close-up, poorly-drawn face, out of frame double, ugly, disfigured, too many fingers, deformed, repetitive, black and white, grainy, extra limbs, bad anatomy, smooth skin, deformed, extra limbs, extra fingers, mutated hands, bad proportions, blind, bad eyes, ugly eyes, dead eyes, out of shot, out of focus, monochrome, noisy, text, writing, logo, oversaturation,over shadow"
     payload = {"prompt": positive_prompt,
                # "negative_prompt":negative_prompt,
@@ -238,7 +238,7 @@ class WriteBook(APIView):
         for rp in reply_content['chapters']:
             rp['illustration'] = leonardoGenerate(rp['title'])
             for pr1 in rp['paragraphs']:
-                text ="titre : "+ rp['title']+".Et qui reflète le texte suivant :" + pr1['text']
+                text = pr1['text']
                 pr1['illustration'] = leonardoGenerate(text)
 
         print(reply_content)
@@ -388,6 +388,7 @@ def generatePDF(template_src,data):
         'margin-bottom': '0in',
         'margin-left': '0in',
         'encoding': "UTF-8",
+        'orientation': 'Landscape',
     }
     pdf = pdfkit.from_string(html, pdf_path, options=options)
     return FileResponse(open(pdf_path, 'rb'), filename=file_name, content_type='application/pdf')
